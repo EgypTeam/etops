@@ -12,6 +12,7 @@ MINIKUBE
 		OR
 		
 		minikube start --listen-address 0.0.0.0 --apiserver-names=satellite-platinum --apiserver-ips=192.168.68.123
+		minikube start --listen-address 0.0.0.0 --apiserver-names=satellite-silverstar --apiserver-ips=192.168.68.145
 		
 	DELETE EVERYTHING
 	
