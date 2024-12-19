@@ -1,0 +1,36 @@
+MINIKUBE
+
+	INSTALL
+	
+		curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+		sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+		
+	START
+	
+		minikube start
+		
+		OR
+		
+		minikube start --listen-address 0.0.0.0 --apiserver-names=satellite-platinum --apiserver-ips=192.168.68.123
+		
+	DELETE EVERYTHING
+	
+		minikube delete --all --purge
+		
+	START CONTAINER WITH IMAGE
+	
+		kubectl create deployment svc-php-8-3-apache-default --image=php:8.3-apache
+		
+	EXPOSE APP
+	
+		kubectl expose deployment svc-php-8-3-apache-default --type=NodePort --port=80
+	
+	PORT FORWARD
+	
+		kubectl port-forward kubernetes --address 0.0.0.0 30000:443 &
+		
+	LIST SERVICES
+	
+		kubectl list services
+		
+	
