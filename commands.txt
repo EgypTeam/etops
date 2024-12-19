@@ -35,3 +35,8 @@ MINIKUBE
 		kubectl list services
 		
 	
+
+
+	https://hub.docker.com/r/pingidentity/pingdirectory/
+
+	https://devops.pingidentity.com/get-started/prereqs/#evaluation-license
