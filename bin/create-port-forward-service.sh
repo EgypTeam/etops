@@ -8,8 +8,11 @@ SERVICEPORT=$2
 if [ "$SERVICEPORT" == "" ]; then
     SERVICEPORT=$SERVICETARGETPORT
 fi
-echo $SERVICEPORT
-#(kubectl port-forward services/$SERVICENAME-service --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT >/dev/null 2> /dev/null) &
 
-echo kubectl port-forward service/$SERVICENAME --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT
-kubectl port-forward service/$SERVICENAME --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT
+echo "Port: $SERVICEPORT"
+
+(kubectl port-forward service/$SERVICENAME --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT >/dev/null 2> /dev/null) &
+
+#echo kubectl port-forward service/$SERVICENAME --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT
+#kubectl port-forward service/$SERVICENAME --address 0.0.0.0 $SERVICEPORT:$SERVICETARGETPORT
+

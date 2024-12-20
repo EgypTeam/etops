@@ -5,7 +5,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: ""
+  storageClassName: manual
   capacity:
     storage: 20Gi
   accessModes:
@@ -18,8 +18,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-5-6
 spec:
-  storageClassName: ""
-  volumeName: mysql-5-6
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
@@ -47,19 +46,19 @@ spec:
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
-          value: password
+          value: Welcome123
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage
+        - name: mysql-5-6
           mountPath: /var/lib/mysql
         stdin: true
         tty: true
       volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-5-6
+        - name: mysql-5-6
+          persistentVolumeClaim:
+            claimName: mysql-5-6
 ---
 apiVersion: v1
 kind: Service
