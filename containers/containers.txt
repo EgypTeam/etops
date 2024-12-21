@@ -1,0 +1,9 @@
+]$ docker run --name onedev-egypteam -d --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock --mount source=onedev,target=/opt/onedev -p 805:6610 -p 806:6611 1dev/server
+]$ docker run -p 804:80 -p 4434:443 --mount source=php-8.1-wiki.egypteam.com-etc,target=/usr/local/etc/php --mount source=php-8.1-wiki.egypteam.com-html,target=/var/www/html --name svc-php-8.1-wiki.egypteam.com php-8.1-apache-egt
+]$ docker run -p 803:80 -p 4433:443 --mount source=php-7.4-wiki.egypteam.com-etc,target=/usr/local/etc/php --mount source=php-7.4-wiki.egypteam.com-html,target=/var/www/html --name svc-php-7.4-wiki.egypteam.com php-7.4-apache-egt
+]$ docker run -p 802:80 -p 4432:443 --mount source=php-7.4-etc,target=/usr/local/etc/php --mount source=php-7.4-html,target=/var/www/html --name svc-php-7.4 php-7.4-apache-egt
+]$ docker run -p 801:80 -p 4431:443 --mount source=php-5.6-etc,target=/usr/local/etc/php --mount source=php-5.6-html,target=/var/www/html --name svc-php-5.6 php-5.6-apache-egt
+]$ docker run -e MYSQL_ROOT_PASSWORD=adfhrccrhfda -p 33061:3306 --mount source=mariadb-latest,target=/var/lib/mysql --name svc-mariadb-latest mariadb:latest
+]$ docker run -e MYSQL_ROOT_PASSWORD=adfhrccrhfda -p ^C060:3306 --mount source=mysql-5.6,target=/var/lib/mysql --name svc-mysql-5.6 mysql:5.6
+]$ docker run -d -p 807:80 -p 4437:443 --mount source=php-7.4-egypteam.com-etc,target=/usr/local/etc/php --mount source=php-7.4-egypteam.com-html,target=/var/www/html --name svc-php-7.4-egypteam.com php-7.4-apache-egt
+]$ docker run -d -p 808:80 -p 4438:443 --mount source=php-7.4-demo.egypteam.com-etc,target=/usr/local/etc/php --mount source=php-7.4-demo.egypteam.com-html,target=/var/www/html --name svc-php-7.4-demo.egypteam.com php-7.4-apache-egt
