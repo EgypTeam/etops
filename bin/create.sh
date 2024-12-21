@@ -7,4 +7,6 @@ CREATEPORTFORWARDSERVICE="$BINPATH/create-port-forward-service.sh"
 
 kubectl apply -f $BINPATH/../local/$SERVICENAME.yaml
 
+sleep 5
+
 $CREATEPORTFORWARDSERVICE $SERVICENAME
