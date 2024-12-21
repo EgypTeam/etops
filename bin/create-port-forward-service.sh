@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#sysctl net.ipv4.ip_unprivileged_port_start=0
-
 SERVICENAME=$1
 SERVICETARGETPORT=$(kubectl get services $SERVICENAME | tail -1 | tr -s " " | cut -f5 -d" " | cut -f 1 -d:)
 SERVICEPORT=$2
