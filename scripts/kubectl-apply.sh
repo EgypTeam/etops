@@ -22,5 +22,5 @@ kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml
 
 sleep 10
 
-egt port create $SERVICE
+egt kubectl portup $SERVICE
 

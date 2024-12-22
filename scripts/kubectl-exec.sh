@@ -6,25 +6,26 @@ if [ "$READ_LINK" != "" ]; then
     THE_BASH_SOURCE=$READ_LINK
 fi
 
-if [ "$2" == "" ]; then
+SERVICEPATH=$1
+SCOPE=$(echo $SERVICEPATH | cut -f1 -d"/")
+SERVICE=$(echo $SERVICEPATH | cut -f2 -d"/")
+if [ "$SERVICE" == "" ]; then
+    SERVICE=$SCOPE
     SCOPE=default
-    SERVICE=$1
-else
-    SCOPE=$1
-    SERVICE=$2
 fi
-
+SCOMMAND=${@:2}
+if [ "$SCOMMAND" == "" ]; then
+    SCOMMAND=/bin/bash
+fi
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 
-PODNAME=$(kubectl get pods | head -2 | tail -1 | tr -s " " | cut -f1 -d" " | grep -E "^$SERVICE\\.*")
-echo $SERVICE
-echo $PODNAME
+PODNAME=$(kubectl get pods | grep -E "^$SERVICE\\.*" | tr -s " " | cut -f1 -d" ")
 
 if [ "$PODNAME" != "" ]; then
 
-    kubectl exec -it $PODNAME /bin/bash
+    kubectl exec -it $PODNAME -- $SCOMMAND
 
 fi
