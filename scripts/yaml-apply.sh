@@ -20,7 +20,7 @@ SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml
 
-sleep 5
+sleep 10
 
 egt port create $SERVICE
 

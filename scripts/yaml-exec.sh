@@ -20,7 +20,7 @@ SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 
 PODNAME=$(kubectl get pods | head -2 | tail -1 | tr -s " " | cut -f1 -d" " | grep -E "^$SERVICE\\.*")
-
+echo $SERVICE
 echo $PODNAME
 
 if [ "$PODNAME" != "" ]; then
