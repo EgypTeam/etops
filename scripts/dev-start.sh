@@ -1,3 +1,9 @@
 #!/bin/bash
 
-egt minikube start
+if [ "$1" == "" ]; then
+    PROVIDER=minikube
+else
+    PROVIDER=$1
+fi
+
+egt dev start-$PROVIDER
