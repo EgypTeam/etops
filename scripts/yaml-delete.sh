@@ -14,6 +14,8 @@ else
     SERVICE=$2
 fi
 
+egt port delete $SERVICE
+
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"

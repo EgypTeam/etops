@@ -19,3 +19,8 @@ BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 kubectl create -f $DESCRIPTORSDIR/$SERVICE.yaml
+
+sleep 5
+
+egt port create $SERVICE
+
