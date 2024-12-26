@@ -17,8 +17,12 @@ spec:
       - image: pingidentity/pingdirectory
         name: pingdirectory
         ports:
+        - containerPort: 1389
+          name: ldap
         - containerPort: 1636
-          name: pingdirectory
+          name: ldaps
+        - containerPort: 1443
+          name: web
         volumeMounts:
         - name: pingdirectory
           mountPath: /opt/staging/pd.profile/server-root/pre-setup/PingDirectory.lic
@@ -39,7 +43,15 @@ spec:
   selector:
     app: pingdirectory
   ports:
+    - name: "1389"
+      protocol: TCP
+      port: 1389
+      targetPort: 1389
     - name: "1636"
       protocol: TCP
-      port: 30083
+      port: 1636
       targetPort: 1636
+    - name: "1443"
+      protocol: TCP
+      port: 1443
+      targetPort: 1443

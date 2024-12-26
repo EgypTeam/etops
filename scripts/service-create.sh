@@ -18,9 +18,9 @@ BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
-kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml
+kubectl create -f $DESCRIPTORSDIR/$SERVICE.yaml
 
 sleep 10
 
-egt kubectl portup $SERVICE
+egt service portup $SERVICE
 

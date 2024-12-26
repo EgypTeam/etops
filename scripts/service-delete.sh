@@ -14,13 +14,10 @@ else
     SERVICE=$2
 fi
 
+egt service portdown $SERVICE
+
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
-kubectl create -f $DESCRIPTORSDIR/$SERVICE.yaml
-
-sleep 10
-
-egt kubectl portup $SERVICE
-
+kubectl delete -f $DESCRIPTORSDIR/$SERVICE.yaml
