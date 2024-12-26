@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingfederate
+spec:
+  selector:
+    matchLabels:
+      app: pingfederate
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pingfederate
+    spec:
+      containers:
+      - image: pingidentity/pingfederate
+        name: pingfederate
+        ports:
+        - containerPort: 9999
+          name: admin
+        - containerPort: 9031
+          name: engine
+        volumeMounts:
+        - name: pingfederate
+          mountPath: /opt/out/instance/server/default/conf/pingfederate.lic
+          subPath: pingfederate.lic
+        stdin: true
+        tty: true
+      volumes:
+      - name: pingfederate
+        configMap:
+          name: ping-federate-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pingfederate
+spec:
+  type: NodePort
+  selector:
+    app: pingfederate
+  ports:
+  - name: "9999"
+    protocol: TCP
+    port: 9999
+    targetPort: 9999
+  - name: "9031"
+    protocol: TCP
+    port: 9031
+    targetPort: 9031
