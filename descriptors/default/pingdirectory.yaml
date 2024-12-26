@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingdirectory
+spec:
+  selector:
+    matchLabels:
+      app: pingdirectory
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pingdirectory
+    spec:
+      containers:
+      - image: pingidentity/pingdirectory
+        name: pingdirectory
+        ports:
+        - containerPort: 1636
+          name: pingdirectory
+        volumeMounts:
+        - name: pingdirectory
+          mountPath: /opt/staging/pd.profile/server-root/pre-setup/PingDirectory.lic
+          subPath: PingDirectory.lic
+        stdin: true
+        tty: true
+      volumes:
+      - name: pingdirectory
+        configMap:
+          name: ping-directory-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pingdirectory
+spec:
+  type: NodePort
+  selector:
+    app: pingdirectory
+  ports:
+    - name: "1636"
+      protocol: TCP
+      port: 30083
+      targetPort: 1636
