@@ -18,6 +18,13 @@ BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
+BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
+AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
+
+if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
+    "$BEFORECREATEDIR/$SERVICE.sh"
+fi
+
 kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml
 
 sleep 10
