@@ -39,6 +39,12 @@ MINIKUBE
 	
 
 
+kubectl create configmap ping-directory-config --from-file=/c/development/egt/customers/nbr/lic/PingDirectory.lic
+kubectl create configmap ping-federate-config --from-file=/c/development/egt/customers/nbr/lic/pingfederate.lic
+
+
+
+
 	https://hub.docker.com/r/pingidentity/pingdirectory/
 
 	https://devops.pingidentity.com/get-started/prereqs/#evaluation-license
