@@ -1,3 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pingdirectory-opt-out
+  labels:
+    type: local
+  spec:
+    storageClassName: pingdirectory-opt-out
+    capacity:
+      storage: 10Gi
+    accessModes:
+      - ReadWriteOnce
+    hostPath:
+      path: "/c/development/devops/volumes/pingdirectory-opt-out"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pingdirectory-opt-out
+spec:
+  storageClassName: pingdirectory-opt-out
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,7 +59,8 @@ spec:
       volumes:
       - name: pingdirectory
         configMap:
-          name: ping-directory-config
+          name: pingdirectory-config
+      - name: pingdirectory
 ---
 apiVersion: v1
 kind: Service
