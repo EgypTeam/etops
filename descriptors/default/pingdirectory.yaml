@@ -4,14 +4,14 @@ metadata:
   name: pingdirectory-opt-out
   labels:
     type: local
-  spec:
-    storageClassName: pingdirectory-opt-out
-    capacity:
-      storage: 10Gi
-    accessModes:
-      - ReadWriteOnce
-    hostPath:
-      path: "/c/development/devops/volumes/pingdirectory-opt-out"
+spec:
+  storageClassName: pingdirectory-opt-out
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/c/development/devops/volumes/pingdirectory-opt-out"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -40,6 +40,13 @@ spec:
       labels:
         app: pingdirectory
     spec:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 9031
+        runAsGroup: 0
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - image: pingidentity/pingdirectory
         name: pingdirectory
@@ -51,16 +58,20 @@ spec:
         - containerPort: 1443
           name: web
         volumeMounts:
-        - name: pingdirectory
+        - name: pingdirectory-config
           mountPath: /opt/staging/pd.profile/server-root/pre-setup/PingDirectory.lic
           subPath: PingDirectory.lic
+        - name: pingdirectory-opt-out
+          mountPath: /opt/out
         stdin: true
         tty: true
       volumes:
-      - name: pingdirectory
+      - name: pingdirectory-config
         configMap:
           name: pingdirectory-config
-      - name: pingdirectory
+      - name: pingdirectory-opt-out
+        persistentVolumeClaim:
+          claimName: pingdirectory-opt-out
 ---
 apiVersion: v1
 kind: Service
