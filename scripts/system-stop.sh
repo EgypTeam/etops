@@ -6,4 +6,4 @@ else
     PROVIDER=$1
 fi
 
-egt dev stop-$PROVIDER
+devops system stop-$PROVIDER
