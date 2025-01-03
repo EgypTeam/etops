@@ -40,6 +40,13 @@ spec:
       labels:
         app: pingfederate
     spec:
+      securityContext:
+        fsGroup: 0
+        runAsUser: 9031
+        runAsGroup: 0
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - image: pingidentity/pingfederate
         name: pingfederate
@@ -49,11 +56,11 @@ spec:
         - containerPort: 9031
           name: engine
         volumeMounts:
-        - name: pingfederate
-          mountPath: /opt/out/instance/server/default/conf/pingfederate.lic
-          subPath: pingfederate.lic
         - name: pingfederate-opt-out
           mountPath: /opt/out
+        - name: pingfederate-opt-out
+          mountPath: /opt/out/instance/server/default/conf/pingfederate.lic
+          subPath: pingfederate.lic
         stdin: true
         tty: true
       volumes:

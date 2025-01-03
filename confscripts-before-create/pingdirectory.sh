@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kubectl create configmap pingdirectory-config --from-file=/c/development/egt/customers/nbr/lic/PingDirectory.lic
+kubectl create configmap pingdirectory-config --from-file=/c/development/devops/lic/ping/PingDirectory.lic
