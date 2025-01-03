@@ -59,7 +59,7 @@ spec:
         - name: pingfederate-opt-out
           mountPath: /opt/out
         - name: pingfederate-opt-out
-          mountPath: /opt/out/instance/server/default/conf/pingfederate.lic
+          mountPath: /opt/out/instance/server/default/conf/pingfederate2.lic
           subPath: pingfederate.lic
         stdin: true
         tty: true
