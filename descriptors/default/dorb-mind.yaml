@@ -1,24 +1,24 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: dorb
+  name: dorb-mind
   labels:
     type: local
 spec:
-  storageClassName: dorb
+  storageClassName: dorb-mind
   capacity:
     storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/c/development/egt/customers/egt/dorb/target"
+    path: "/c/development/egt/customers/egt/dorb-mind/target"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dorb
+  name: dorb-mind
 spec:
-  storageClassName: dorb
+  storageClassName: dorb-mind
   accessModes:
     - ReadWriteOnce
   resources:
@@ -28,23 +28,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dorb
+  name: dorb-mind
 spec:
   selector:
     matchLabels:
-      app: dorb
+      app: dorb-mind
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: dorb
+        app: dorb-mind
     spec:
       containers:
       - image: ubuntu
-        name: dorb
+        name: dorb-mind
         volumeMounts:
-        - name: dorb
+        - name: dorb-mind
           mountPath: /dev/target
         stdin: true
         tty: true
@@ -52,20 +52,20 @@ spec:
         workingDir: /dev/target
         args: ["ls -lah"]
       volumes:
-      - name: dorb
+      - name: dorb-mind
         persistentVolumeClaim:
-          claimName: dorb
+          claimName: dorb-mind
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: dorb
+  name: dorb-mind
 spec:
   type: NodePort
   selector:
-    app: dorb
+    app: dorb-mind
   ports:
     - name: "2222"
       protocol: TCP
-      port: 22220
+      port: 22221
       targetPort: 22
