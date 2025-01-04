@@ -11,6 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
+    type: DirectoryOrCreate
     path: "/c/development/devops/volumes/pingfederate-opt-out"
 ---
 apiVersion: v1
@@ -40,7 +41,7 @@ spec:
       labels:
         app: pingfederate
     spec:
-      securityContext:
+      securityContext:                                                                                                                                                                                                               
         fsGroup: 0
         runAsUser: 9031
         runAsGroup: 0
@@ -56,20 +57,20 @@ spec:
         - containerPort: 9031
           name: engine
         volumeMounts:
+        - name: pingfederate-config
+          mountPath: /opt/out/instance/server/default/conf/pingfederate2.lic
+          subPath: pingfederate2.lic
         - name: pingfederate-opt-out
           mountPath: /opt/out
-        - name: pingfederate-opt-out
-          mountPath: /opt/out/instance/server/default/conf/pingfederate2.lic
-          subPath: pingfederate.lic
         stdin: true
         tty: true
       volumes:
-      - name: pingfederate-config
-        configMap:
-          name: pingfederate-config
       - name: pingfederate-opt-out
         persistentVolumeClaim:
           claimName: pingfederate-opt-out
+      - name: pingfederate-config
+        configMap:
+          name: pingfederate-config
 ---
 apiVersion: v1
 kind: Service

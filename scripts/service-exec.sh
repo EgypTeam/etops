@@ -15,7 +15,7 @@ if [ "$SERVICE" == "" ]; then
 fi
 SCOMMAND=${@:2}
 if [ "$SCOMMAND" == "" ]; then
-    SCOMMAND=/bin/bash
+    SCOMMAND=/bin/sh
 fi
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
