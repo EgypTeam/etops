@@ -8,7 +8,7 @@ spec:
   containers:
   - name: dorb
     image: alpine
-    command: ["ping"]
-    args: ["www.google.com.br"]
+    command: ["watch"]
+    args: ["pwd"]
   restartPolicy: OnFailure
   
