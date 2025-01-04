@@ -6,4 +6,4 @@ else
     PROVIDER=$1
 fi
 
-devops system stop-$PROVIDER
+etops system stop-$PROVIDER

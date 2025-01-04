@@ -14,7 +14,7 @@ else
     SERVICE=$2
 fi
 
-devops service portdown $SERVICE
+etops service portdown $SERVICE
 
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)

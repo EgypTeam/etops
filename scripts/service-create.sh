@@ -29,5 +29,5 @@ kubectl create -f $DESCRIPTORSDIR/$SERVICE.yaml
 
 sleep 10
 
-devops service portup $SERVICE
+etops service portup $SERVICE
 
