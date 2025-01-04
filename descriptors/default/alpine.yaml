@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine
+  labels:
+    purpose: alpine
+spec:
+  containers:
+  - name: dorb
+    image: alpine
+    command: ["ping"]
+    args: ["www.google.com.br"]
+  restartPolicy: OnFailure
+  
