@@ -5,4 +5,5 @@
 IPADDRESS=$(hostname -I | cut -f 1 -d" ")
 ALLIPADDRESSES=$(hostname --ip-address | tr " " ",")
 
-minikube delete --all --purge
+minikube stop
+

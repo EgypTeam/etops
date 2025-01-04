@@ -6,4 +6,4 @@ else
     PROVIDER=$1
 fi
 
-devops system start-$PROVIDER
+etops system start-$PROVIDER

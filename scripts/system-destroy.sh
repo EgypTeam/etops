@@ -6,4 +6,4 @@ else
     PROVIDER=$1
 fi
 
-etops system pause-$PROVIDER
+etops system destroy-$PROVIDER
