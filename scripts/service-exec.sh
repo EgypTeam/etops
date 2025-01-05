@@ -22,7 +22,7 @@ BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 
-PODNAME=$(kubectl get pods | grep -E "^$SERVICE\\.*" | tr -s " " | cut -f1 -d" ")
+PODNAME=$(kubectl get pods --profile etops | grep -E "^$SERVICE\\.*" | tr -s " " | cut -f1 -d" ")
 
 if [ "$PODNAME" != "" ]; then
 

@@ -25,7 +25,7 @@ if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
     "$BEFORECREATEDIR/$SERVICE.sh"
 fi
 
-kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml
+kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml --profile etops
 
 sleep 10
 

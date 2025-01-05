@@ -5,5 +5,5 @@
 IPADDRESS=$(hostname -I | cut -f 1 -d" ")
 ALLIPADDRESSES=$(hostname --ip-address | tr " " ",")
 
-minikube stop
+minikube stop --profile etops
 

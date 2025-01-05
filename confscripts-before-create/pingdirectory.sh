@@ -10,4 +10,4 @@ else
     sudo chmod -R 775 /c/development/devops/volumes/pingdirectory-opt-out
 fi
 
-kubectl create configmap pingdirectory-config --from-file=/c/development/devops/lic/ping/PingDirectory.lic
+kubectl create configmap pingdirectory-config --from-file=/c/development/devops/lic/ping/PingDirectory.lic --profile etops

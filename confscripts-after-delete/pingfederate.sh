@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kubectl delete configmap pingfederate-config
+kubectl delete configmap pingfederate-config --profile etops

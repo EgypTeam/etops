@@ -3,11 +3,11 @@
 #sysctl net.ipv4.ip_unprivileged_port_start=0
 
 SERVICENAME=$1
-SERVICETARGETPORTS=$(kubectl get service $SERVICENAME | tail -1 | tr -s " " | cut -f5 -d" " | tr "," "\\n" | cut -f 1 -d:)
+SERVICETARGETPORTS=$(kubectl get service --profile etops $SERVICENAME | tail -1 | tr -s " " | cut -f5 -d" " | tr "," "\\n" | cut -f 1 -d:)
 
 for SERVICETARGETPORT in $SERVICETARGETPORTS; do
     echo "Port: $SERVICETARGETPORT"
-    PID=$(ps aux | grep -E "[0-9] kubectl port-forward" | grep -i " $SERVICETARGETPORT:" | tr -s " " | cut -f 2 -d" ")
+    PID=$(ps aux | grep -E "[0-9] kubectl port-forward --profile etops" | grep -i " $SERVICETARGETPORT:" | tr -s " " | cut -f 2 -d" ")
     if [ "$PID" != "" ]; then
         kill -9 $PID
     fi

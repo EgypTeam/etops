@@ -7,22 +7,25 @@ ALLIPADDRESSES=$(hostname --ip-address | tr " " ",")
 
 #minikube start --listen-address 0.0.0.0 --mount-string="/c:/c" --mount  --apiserver-names=$HOSTNAME --apiserver-ips=$IPADDRESS
 
-OUTPUT=$(minikube status 2> /dev/null)
-NOTFOUND=$(echo $OUTPUT | grep -i "Profile \"minikube\" not found.")
-STARTING=$(echo $OUTPUT | grep -i "The \"minikube\" host does not exist!")
+OUTPUT=$(minikube status --profile etops 2> /dev/null)
+
+echo $OUTPUT
+
+NOTFOUND=$(echo $OUTPUT | grep -i "Profile \"etops\" not found.")
+STARTING=$(echo $OUTPUT | grep -i "The \"etops\" host does not exist!")
 RUNNING=$(echo $OUTPUT | grep -i "host: Running")
 STOPPED=$(echo $OUTPUT | grep -i "host: Stopped")
-
+#echo $STOPPING
 if [ "$NOTFOUND" != "" ]; then
     echo "NOT INITIALIZED"
 elif [ "$STARTING" != "" ]; then
-    echo "STARTING"
+    echo "STARTING..."
 elif [ "$STARTING2" != "" ]; then
-    echo "STARTING"
+    echo "STARTING..."
 elif [ "$STOPPED" != "" ]; then
     echo "STOPPED"
 elif [ "$RUNNING" != "" ]; then
     echo "RUNNING"
 else
-    echo "STOPPING"
+    echo "PROCESSING..."
 fi

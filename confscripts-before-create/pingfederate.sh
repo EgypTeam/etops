@@ -10,4 +10,4 @@ else
     sudo chmod -R 775 /c/development/devops/volumes/pingfederate-opt-out
 fi
 
-kubectl create configmap pingfederate-config --from-file=/c/development/devops/lic/ping/pingfederate.lic
+kubectl create configmap pingfederate-config --from-file=/c/development/devops/lic/ping/pingfederate.lic --profile etops
