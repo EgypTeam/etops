@@ -23,7 +23,7 @@ DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 
-kubectl delete -f $DESCRIPTORSDIR/$SERVICE.yaml --profile etops
+kubectl delete -f $DESCRIPTORSDIR/$SERVICE.yaml --context etops
 
 if [ -f "$AFTERDELETEDIR/$SERVICE.sh" ]; then
     "$AFTERDELETEDIR/$SERVICE.sh"
