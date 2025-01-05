@@ -9,13 +9,13 @@ ALLIPADDRESSES=$(hostname --ip-address | tr " " ",")
 
 OUTPUT=$(minikube status --profile etops 2> /dev/null)
 
-echo $OUTPUT
+#echo $OUTPUT
 
 NOTFOUND=$(echo $OUTPUT | grep -i "Profile \"etops\" not found.")
 STARTING=$(echo $OUTPUT | grep -i "The \"etops\" host does not exist!")
 RUNNING=$(echo $OUTPUT | grep -i "host: Running")
 STOPPED=$(echo $OUTPUT | grep -i "host: Stopped")
-#echo $STOPPING
+
 if [ "$NOTFOUND" != "" ]; then
     echo "NOT INITIALIZED"
 elif [ "$STARTING" != "" ]; then
