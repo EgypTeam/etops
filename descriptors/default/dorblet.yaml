@@ -41,7 +41,7 @@ spec:
         app: dorblet
     spec:
       containers:
-      - image: pedrofmj/php-apache-egt:8.2
+      - image: pedrofmj/php-apache-egt:7.4
         name: dorblet
         ports:
         - containerPort: 80
