@@ -22,8 +22,9 @@ SCRIPTSDIR="$BASEDIR/scripts"
 DESCRIPTORSDIR="$BASEDIR/descriptors/$SCOPE"
 BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
+export VOLUMESDIR="$BASEDIR/volumes"
 
-kubectl delete -f $DESCRIPTORSDIR/$SERVICE.yaml --context etops
+envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl delete -f - --context etops
 
 if [ -f "$AFTERDELETEDIR/$SERVICE.sh" ]; then
     "$AFTERDELETEDIR/$SERVICE.sh"
