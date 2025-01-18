@@ -14,6 +14,8 @@ else
     SERVICE=$2
 fi
 
+etops service portdown $SERVICE
+
 BINDIR=$(dirname $THE_BASH_SOURCE)
 BASEDIR=$(dirname $BINDIR)
 SCRIPTSDIR="$BASEDIR/scripts"
@@ -22,14 +24,8 @@ BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 export VOLUMESDIR="$BASEDIR/volumes"
 
-if [ "$1" == "system" ] | [ "$1" == "" ]; then
-    SERVICES=$(kubectl get services --context etops | grep -i "NodePort" | tr -s " " | cut -f 1 -d" ")
-    for SERVICE in $SERVICES; do
-        echo SERVICE $SERVICE portup
-        if [ -f "$DESCRIPTORSDIR/$SERVICE.yaml" ]; then
-            etops service portup $SERVICE
-        fi
-    done
-else
-    etops service portup $*
+envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl delete -f - --context etops
+
+if [ -f "$AFTERDELETEDIR/$SERVICE.sh" ]; then
+    "$AFTERDELETEDIR/$SERVICE.sh"
 fi

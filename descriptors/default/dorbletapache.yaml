@@ -41,16 +41,14 @@ spec:
         app: dorblet
     spec:
       containers:
-      # - image: pedrofmj/php-apache-egt:7.4
-      - image: nginx
+      - image: pedrofmj/php-apache-egt:7.4
         name: dorblet
         ports:
         - containerPort: 80
           name: dorblet
         volumeMounts:
         - name: dorblet
-          #mountPath: /var/www/html
-          mountPath: /usr/share/nginx/html
+          mountPath: /var/www/html
         stdin: true
         tty: true
       volumes:
