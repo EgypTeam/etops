@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/bin/bash
+
 THE_BASH_SOURCE=$BASH_SOURCE
 READ_LINK=$(readlink -f $THE_BASH_SOURCE)
 if [ "$READ_LINK" != "" ]; then
@@ -22,12 +24,11 @@ BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 export VOLUMESDIR="$BASEDIR/volumes"
 
-if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
-    "$BEFORECREATEDIR/$SERVICE.sh"
-fi
+envsubst < $DESCRIPTORSDIR/$SERVICE.yaml
 
-envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl create -f - --context etops
+#kubectl create -f $DESCRIPTORSDIR/$SERVICE.yaml --context devops
 
-# sleep 10
-# etops service portup $SERVICE
+#sleep 10
+#
+#devops service portup $SERVICE
 

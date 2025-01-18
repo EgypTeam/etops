@@ -22,12 +22,14 @@ BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 export VOLUMESDIR="$BASEDIR/volumes"
 
-if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
-    "$BEFORECREATEDIR/$SERVICE.sh"
+if [ "$1" == "system" ] | [ "$1" == "" ]; then
+    SERVICES=$(kubectl get services --context etops | grep -i "NodePort" | tr -s " " | cut -f 1 -d" ")
+    for SERVICE in $SERVICES; do
+        echo SERVICE $SERVICE portdown
+        if [ -f "$DESCRIPTORSDIR/$SERVICE.yaml" ]; then
+            etops service portdown $SERVICE
+        fi
+    done
+else
+    etops service portdown $*
 fi
-
-envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl create -f - --context etops
-
-# sleep 10
-# etops service portup $SERVICE
-

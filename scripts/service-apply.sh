@@ -25,7 +25,7 @@ if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
     "$BEFORECREATEDIR/$SERVICE.sh"
 fi
 
-kubectl apply -f $DESCRIPTORSDIR/$SERVICE.yaml --context etops
+envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl apply -f - --context etops
 
 sleep 10
 
