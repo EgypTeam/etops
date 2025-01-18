@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: dorblet
+  name: dorbletapache
   labels:
     type: local
 spec:
-  storageClassName: dorblet
+  storageClassName: dorbletapache
   capacity:
     storage: 20Gi
   accessModes:
@@ -16,9 +16,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dorblet
+  name: dorbletapache
 spec:
-  storageClassName: dorblet
+  storageClassName: dorbletapache
   accessModes:
     - ReadWriteOnce
   resources:
@@ -28,42 +28,42 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dorblet
+  name: dorbletapache
 spec:
   selector:
     matchLabels:
-      app: dorblet
+      app: dorbletapache
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: dorblet
+        app: dorbletapache
     spec:
       containers:
       - image: pedrofmj/php-apache-egt:7.4
-        name: dorblet
+        name: dorbletapache
         ports:
         - containerPort: 80
-          name: dorblet
+          name: dorbletapache
         volumeMounts:
-        - name: dorblet
+        - name: dorbletapache
           mountPath: /var/www/html
         stdin: true
         tty: true
       volumes:
-        - name: dorblet
+        - name: dorbletapache
           persistentVolumeClaim:
-            claimName: dorblet
+            claimName: dorbletapache
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: dorblet
+  name: dorbletapache
 spec:
   type: NodePort
   selector:
-    app: dorblet
+    app: dorbletapache
   ports:
     - name: "80"
       protocol: TCP
