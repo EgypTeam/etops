@@ -67,5 +67,5 @@ spec:
   ports:
     - name: "80"
       protocol: TCP
-      port: 40000
+      port: 50000
       targetPort: 80
