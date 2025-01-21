@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/c/development/egt/customers/egt/dorblet"
+    path: "/c/development/egt/customers/egt/dorb/dorblet"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
