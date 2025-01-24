@@ -5,7 +5,14 @@
 IPADDRESS=$(hostname -I | cut -f 1 -d" ")
 ALLIPADDRESSES=$(hostname --ip-address | tr " " ",")
 
-minikube start --profile etops --listen-address 0.0.0.0 --mount-string="/c:/c" --mount  --apiserver-names=$HOSTNAME --apiserver-ips=$IPADDRESS
+minikube start \
+    --profile etops \
+    --listen-address 0.0.0.0 \
+    --mount-string="/c:/c" \
+    --mount  \
+    --apiserver-names=$HOSTNAME \
+    --apiserver-ips=$IPADDRESS \
+    --static-ip=192.168.58.2
 
 # /etc/kubernetes/manifests/kube-apiserver.yaml
 # --apiserver-service-node-port-range=1-65535
