@@ -26,15 +26,13 @@ spec:
       storage: 20Gi 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mysql-5-6
 spec:
   selector:
     matchLabels:
       app: mysql-5.6
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
