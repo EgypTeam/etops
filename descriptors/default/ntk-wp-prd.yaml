@@ -25,6 +25,33 @@ spec:
     requests:
       storage: 20Gi 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntk-wp-prd-etc
+  labels:
+    type: local
+spec:
+  storageClassName: ntk-wp-prd-etc
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/ntk-wp-prd-etc"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntk-wp-prd-etc
+spec:
+  storageClassName: ntk-wp-prd-etc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -47,12 +74,17 @@ spec:
         volumeMounts:
         - name: ntk-wp-prd
           mountPath: /var/www/html
+        - name: ntk-wp-prd-etc
+          mountPath: /usr/local/etc/php
         stdin: true
         tty: true
       volumes:
         - name: ntk-wp-prd
           persistentVolumeClaim:
             claimName: ntk-wp-prd
+        - name: ntk-wp-prd-etc
+          persistentVolumeClaim:
+            claimName: ntk-wp-prd-etc
 ---
 apiVersion: v1
 kind: Service
