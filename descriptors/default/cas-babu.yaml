@@ -51,6 +51,13 @@ spec:
           mountPath: /var/www/html
         stdin: true
         tty: true
+        resources:
+          limits:
+            cpu: 1
+            memory: 1024Mi
+          requests: 
+            cpu: 1
+            memory: 1024Mi
       volumes:
         - name: cas-babu
           persistentVolumeClaim:
