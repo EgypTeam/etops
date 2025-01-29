@@ -26,15 +26,15 @@ spec:
       storage: 20Gi 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: egt-wiki
 spec:
   selector:
     matchLabels:
       app: egt-wiki
-  strategy:
-    type: Recreate
+  # strategy:
+  #   type: Recreate
   template:
     metadata:
       labels:

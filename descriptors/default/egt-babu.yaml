@@ -26,15 +26,15 @@ spec:
       storage: 20Gi 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: egt-babu
 spec:
   selector:
     matchLabels:
       app: egt-babu
-  strategy:
-    type: Recreate
+  # strategy:
+  #   type: Recreate
   template:
     metadata:
       labels:
