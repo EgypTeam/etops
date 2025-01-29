@@ -1,8 +1,11 @@
 #!/bin/bash
 
-if [ "$1" == "" ]; then
-    echo "Missing command class"
-    exit 1
+THECOMMAND=$1
+
+if [ "$THECOMMAND" == "" ]; then
+    #echo "Missing command class"
+    #exit 1
+    THECOMMAND=ui
 fi
 
 THE_BASH_SOURCE=$BASH_SOURCE
