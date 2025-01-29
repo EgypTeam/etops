@@ -76,7 +76,7 @@ spec:
         volumeMounts:
         - name: ntk-erp
           mountPath: /var/www/html
-        - name: ntk-erp
+        - name: ntk-erp-etc
           mountPath: /usr/local/etc/php
         stdin: true
         tty: true
