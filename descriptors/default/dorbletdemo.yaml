@@ -26,15 +26,13 @@ spec:
       storage: 20Gi 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: dorbletdemo
 spec:
   selector:
     matchLabels:
       app: dorbletdemo
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
