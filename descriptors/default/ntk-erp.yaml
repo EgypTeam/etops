@@ -25,33 +25,33 @@ spec:
     requests:
       storage: 20Gi 
 ---
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: ntk-erp-etc
-#   labels:
-#     type: local
-# spec:
-#   storageClassName: ntk-erp-etc
-#   capacity:
-#     storage: 20Gi
-#   accessModes:
-#     - ReadWriteOnce
-#   hostPath:
-#     path: "$VOLUMESDIR/ntk-erp-etc"
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: ntk-erp-etc
-# spec:
-#   storageClassName: ntk-erp-etc
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 20Gi 
-# ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntk-erp-etc
+  labels:
+    type: local
+spec:
+  storageClassName: ntk-erp-etc
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/ntk-erp-etc"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntk-erp-etc
+spec:
+  storageClassName: ntk-erp-etc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -76,8 +76,8 @@ spec:
         volumeMounts:
         - name: ntk-erp
           mountPath: /var/www/html
-        # - name: ntk-erp-etc
-        #   mountPath: /usr/local/etc/php
+        - name: ntk-erp-etc
+          mountPath: /usr/local/etc/php
         stdin: true
         tty: true
         resources:
@@ -91,9 +91,9 @@ spec:
         - name: ntk-erp
           persistentVolumeClaim:
             claimName: ntk-erp
-        # - name: ntk-erp-etc
-        #   persistentVolumeClaim:
-        #     claimName: ntk-erp-etc
+        - name: ntk-erp-etc
+          persistentVolumeClaim:
+            claimName: ntk-erp-etc
 ---
 apiVersion: v1
 kind: Service
