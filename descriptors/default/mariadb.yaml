@@ -69,8 +69,8 @@ spec:
   selector:
     app: mariadb
   ports:
-    - name: "33061"
+    - name: "13061"
       protocol: TCP
-      port: 33061
+      port: 13061
       targetPort: 3306
       nodePort: 13061
