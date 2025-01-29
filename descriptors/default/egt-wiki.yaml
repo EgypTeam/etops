@@ -41,7 +41,7 @@ spec:
         app: egt-wiki
     spec:
       containers:
-      - image: pedrofmj/php-apache-egt:7.4
+      - image: pedrofmj/php-apache-egt:8.1
         name: egt-wiki
         ports:
         - containerPort: 80
