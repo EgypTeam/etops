@@ -73,4 +73,4 @@ spec:
       protocol: TCP
       port: 33061
       targetPort: 3306
-      nodePort: 33061
+      nodePort: 13061
