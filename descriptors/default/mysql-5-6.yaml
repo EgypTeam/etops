@@ -69,8 +69,8 @@ spec:
   selector:
     app: mysql-5.6
   ports:
-    - name: "13060"
+    - name: "30306"
       protocol: TCP
-      port: 13060
+      port: 30306
       targetPort: 3306
-      nodePort: 13060
+      nodePort: 30306
