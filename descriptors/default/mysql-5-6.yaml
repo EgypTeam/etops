@@ -53,6 +53,13 @@ spec:
           mountPath: /var/lib/mysql
         stdin: true
         tty: true
+        resources:
+          limits:
+            cpu: 1
+            memory: 1024Mi
+          requests: 
+            cpu: 1
+            memory: 1024Mi
       volumes:
         - name: mysql-5-6
           persistentVolumeClaim:
