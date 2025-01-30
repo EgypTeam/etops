@@ -52,6 +52,33 @@ spec:
     requests:
       storage: 20Gi 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntk-erp-etc-apache
+  labels:
+    type: local
+spec:
+  storageClassName: ntk-erp-etc-apache
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/ntk-erp-etc-apache"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntk-erp-etc-apache
+spec:
+  storageClassName: ntk-erp-etc-apache
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -78,6 +105,8 @@ spec:
           mountPath: /var/www/html
         - name: ntk-erp-etc-php
           mountPath: /usr/local/etc/php
+        - name: ntk-erp-etc-apache
+          mountPath: /etc/apache2
         stdin: true
         tty: true
         resources:
@@ -94,6 +123,9 @@ spec:
         - name: ntk-erp-etc-php
           persistentVolumeClaim:
             claimName: ntk-erp-etc-php
+        - name: ntk-erp-etc-apache
+          persistentVolumeClaim:
+            claimName: ntk-erp-etc-apache
 ---
 apiVersion: v1
 kind: Service
