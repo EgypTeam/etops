@@ -104,7 +104,7 @@ spec:
         - name: ntk-wp-hom-etc-php
           mountPath: /usr/local/etc/php
         - name: ntk-wp-hom-etc-apache
-          mountPath: /usr/local/etc/apache2
+          mountPath: /etc/apache2
         stdin: true
         tty: true
       volumes:
