@@ -28,24 +28,51 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ntk-wp-prd-etc
+  name: ntk-wp-prd-etc-php
   labels:
     type: local
 spec:
-  storageClassName: ntk-wp-prd-etc
+  storageClassName: ntk-wp-prd-etc-php
   capacity:
     storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/ntk-wp-prd-etc"
+    path: "$VOLUMESDIR/ntk-wp-prd-etc-php"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ntk-wp-prd-etc
+  name: ntk-wp-prd-etc-php
 spec:
-  storageClassName: ntk-wp-prd-etc
+  storageClassName: ntk-wp-prd-etc-php
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntk-wp-prd-etc-apache
+  labels:
+    type: local
+spec:
+  storageClassName: ntk-wp-prd-etc-apache
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/ntk-wp-prd-etc-apache"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntk-wp-prd-etc-apache
+spec:
+  storageClassName: ntk-wp-prd-etc-apache
   accessModes:
     - ReadWriteOnce
   resources:
@@ -74,17 +101,22 @@ spec:
         volumeMounts:
         - name: ntk-wp-prd
           mountPath: /var/www/html
-        - name: ntk-wp-prd-etc
+        - name: ntk-wp-prd-etc-php
           mountPath: /usr/local/etc/php
+        - name: ntk-wp-prd-etc-apache
+          mountPath: /etc/apache2
         stdin: true
         tty: true
       volumes:
         - name: ntk-wp-prd
           persistentVolumeClaim:
             claimName: ntk-wp-prd
-        - name: ntk-wp-prd-etc
+        - name: ntk-wp-prd-etc-php
           persistentVolumeClaim:
-            claimName: ntk-wp-prd-etc
+            claimName: ntk-wp-prd-etc-php
+        - name: ntk-wp-prd-etc-apache
+          persistentVolumeClaim:
+            claimName: ntk-wp-prd-etc-apache
 ---
 apiVersion: v1
 kind: Service
