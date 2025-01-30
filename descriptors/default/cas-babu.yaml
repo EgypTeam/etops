@@ -25,6 +25,60 @@ spec:
     requests:
       storage: 20Gi 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cas-babu-etc-php
+  labels:
+    type: local
+spec:
+  storageClassName: cas-babu-etc-php
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/cas-babu-etc-php"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cas-babu-etc-php
+spec:
+  storageClassName: cas-babu-etc-php
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cas-babu-etc-apache
+  labels:
+    type: local
+spec:
+  storageClassName: cas-babu-etc-apache
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/cas-babu-etc-apache"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cas-babu-etc-apache
+spec:
+  storageClassName: cas-babu-etc-apache
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -49,6 +103,10 @@ spec:
         volumeMounts:
         - name: cas-babu
           mountPath: /var/www/html
+        - name: cas-babu-etc-php
+          mountPath: /usr/local/etc/php
+        - name: cas-babu-etc-apache
+          mountPath: /etc/apache2
         stdin: true
         tty: true
         resources:
@@ -62,6 +120,12 @@ spec:
         - name: cas-babu
           persistentVolumeClaim:
             claimName: cas-babu
+        - name: cas-babu-etc-php
+          persistentVolumeClaim:
+            claimName: cas-babu-etc-php
+        - name: cas-babu-etc-apache
+          persistentVolumeClaim:
+            claimName: cas-babu-etc-apache
 ---
 apiVersion: v1
 kind: Service
