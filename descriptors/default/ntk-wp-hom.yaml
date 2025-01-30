@@ -52,6 +52,33 @@ spec:
     requests:
       storage: 20Gi 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ntk-wp-hom-etc-apache
+  labels:
+    type: local
+spec:
+  storageClassName: ntk-wp-hom-etc-apache
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/ntk-wp-hom-etc-apache"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntk-wp-hom-etc-apache
+spec:
+  storageClassName: ntk-wp-hom-etc-apache
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -76,6 +103,8 @@ spec:
           mountPath: /var/www/html
         - name: ntk-wp-hom-etc-php
           mountPath: /usr/local/etc/php
+        - name: ntk-wp-hom-etc-apache
+          mountPath: /usr/local/etc/apache2
         stdin: true
         tty: true
       volumes:
@@ -85,6 +114,9 @@ spec:
         - name: ntk-wp-hom-etc-php
           persistentVolumeClaim:
             claimName: ntk-wp-hom-etc-php
+        - name: ntk-wp-hom-etc-apache
+          persistentVolumeClaim:
+            claimName: ntk-wp-hom-etc-apache
 ---
 apiVersion: v1
 kind: Service
