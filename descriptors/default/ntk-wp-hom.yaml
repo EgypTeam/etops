@@ -38,7 +38,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/ntk-wp-hom-etc-php"
+    path: "$VOLUMESDIR/out/vol-ntk-wp-hom-etc-php"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -65,7 +65,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/ntk-wp-hom-etc-apache"
+    path: "$VOLUMESDIR/out/vol-ntk-wp-hom-etc-apache"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

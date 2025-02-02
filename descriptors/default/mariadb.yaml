@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/mariadb"
+    path: "$VOLUMESDIR/out/vol-mariadb"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

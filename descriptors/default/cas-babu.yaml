@@ -38,7 +38,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/cas-babu-etc-php"
+    path: "$VOLUMESDIR/out/vol-cas-babu-etc-php"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -65,7 +65,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "$VOLUMESDIR/cas-babu-etc-apache"
+    path: "$VOLUMESDIR/out-vol-cas-babu-etc-apache"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
