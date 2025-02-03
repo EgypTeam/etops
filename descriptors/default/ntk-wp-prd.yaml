@@ -107,6 +107,13 @@ spec:
           mountPath: /etc/apache2
         stdin: true
         tty: true
+        resources:
+          limits:
+            # cpu: 1
+            memory: 2048Mi
+          requests: 
+            # cpu: 1
+            memory: 2048Mi
       volumes:
         - name: ntk-wp-prd
           persistentVolumeClaim:
