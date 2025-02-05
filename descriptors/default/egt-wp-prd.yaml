@@ -118,6 +118,12 @@ spec:
         - name: egt-wp-prd
           persistentVolumeClaim:
             claimName: egt-wp-prd
+        - name: egt-wp-prd-etc-php
+          persistentVolumeClaim:
+            claimName: egt-wp-prd-etc-php
+        - name: egt-wp-prd-etc-apache
+          persistentVolumeClaim:
+            claimName: egt-wp-prd-etc-apache
 ---
 apiVersion: v1
 kind: Service
