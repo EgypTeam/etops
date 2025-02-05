@@ -51,6 +51,13 @@ spec:
           mountPath: /var/www/html
         stdin: true
         tty: true
+        resources:
+          limits:
+            # cpu: 1
+            memory: 512Mi
+          requests: 
+            # cpu: 1
+            memory: 512Mi
       volumes:
         - name: egt-wiki
           persistentVolumeClaim:
