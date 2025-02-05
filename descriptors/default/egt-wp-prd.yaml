@@ -25,6 +25,60 @@ spec:
     requests:
       storage: 20Gi 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: egt-wp-prd-etc-php
+  labels:
+    type: local
+spec:
+  storageClassName: egt-wp-prd-etc-php
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/out/vol-egt-wp-prd-etc-php"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: egt-wp-prd-etc-php
+spec:
+  storageClassName: egt-wp-prd-etc-php
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: egt-wp-prd-etc-apache
+  labels:
+    type: local
+spec:
+  storageClassName: egt-wp-prd-etc-apache
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/out/vol-egt-wp-prd-etc-apache"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: egt-wp-prd-etc-apache
+spec:
+  storageClassName: egt-wp-prd-etc-apache
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -47,6 +101,10 @@ spec:
         volumeMounts:
         - name: egt-wp-prd
           mountPath: /var/www/html
+        - name: egt-wp-prd-etc-php
+          mountPath: /usr/local/etc/php
+        - name: egt-wp-prd-etc-apache
+          mountPath: /etc/apache2
         stdin: true
         tty: true
         resources:
