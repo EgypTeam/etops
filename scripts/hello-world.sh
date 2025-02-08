@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo -n $*
-echo
+echo $ETOPS_COMMAND_REAL
+
