@@ -1,6 +1,33 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: calibre-c
+  labels:
+    type: local
+spec:
+  storageClassName: calibre-c
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/c"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: calibre-c
+spec:
+  storageClassName: calibre-c
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: calibre-config
   labels:
     type: local
@@ -99,6 +126,8 @@ spec:
           mountPath: /config
         - name: calibre-data
           mountPath: /data
+        - name: calibre-c
+          mountPath: /c
         stdin: true
         tty: true
         resources:
@@ -109,6 +138,9 @@ spec:
             # cpu: 1
             memory: 1024Mi
       volumes:
+        - name: calibre-c
+          persistentVolumeClaim:
+            claimName: calibre-c
         - name: calibre-config
           persistentVolumeClaim:
             claimName: calibre-config
