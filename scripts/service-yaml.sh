@@ -24,8 +24,8 @@ BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 export VOLUMESDIR="$BASEDIR/volumes"
 
-if [ -f "$BEFORECREATEDIR/private-$SERVICE.sh" ]; then
-    source "$BEFORECREATEDIR/private-$SERVICE.sh"
+if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
+    source "$BEFORECREATEDIR/$SERVICE.sh"
 fi
 
 envsubst < $DESCRIPTORSDIR/$SERVICE.yaml
