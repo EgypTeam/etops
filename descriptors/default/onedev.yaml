@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onedev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onedev
+  template:
+    metadata:
+      labels:
+        app: onedev
+    spec:
+      containers:
+        - name: onedev
+          image: onedev:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+          resources:
+            limits:
+              #cpu: "500m"
+              memory: "512Mi"
+            requests:
+              #cpu: "250m"
+              memory: "256Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: onedev
+spec:
+  type: NodePort
+  selector:
+    app: onedev
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP  # Change to NodePort or LoadBalancer as needed
