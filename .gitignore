@@ -1,1 +1,4 @@
 /volumes/out/vol-*
+/confscripts-before-create/private-*
+/confscripts-after-delete/private-*
+

@@ -1,24 +1,24 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: calibre-c
+  name: calibre-external
   labels:
     type: local
 spec:
-  storageClassName: calibre-c
+  storageClassName: calibre-external
   capacity:
     storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/c"
+    path: "$CALIBREEXTERNALDIR/external"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: calibre-c
+  name: calibre-external
 spec:
-  storageClassName: calibre-c
+  storageClassName: calibre-external
   accessModes:
     - ReadWriteOnce
   resources:
@@ -140,7 +140,7 @@ spec:
       volumes:
         - name: calibre-c
           persistentVolumeClaim:
-            claimName: calibre-c
+            claimName: calibre-external
         - name: calibre-config
           persistentVolumeClaim:
             claimName: calibre-config

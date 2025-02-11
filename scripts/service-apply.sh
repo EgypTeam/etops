@@ -22,7 +22,7 @@ BEFORECREATEDIR="$BASEDIR/confscripts-before-create"
 AFTERDELETEDIR="$BASEDIR/confscripts-after-delete"
 
 if [ -f "$BEFORECREATEDIR/$SERVICE.sh" ]; then
-    "$BEFORECREATEDIR/$SERVICE.sh"
+    source "$BEFORECREATEDIR/$SERVICE.sh"
 fi
 
 envsubst < $DESCRIPTORSDIR/$SERVICE.yaml | kubectl apply -f - --context etops
