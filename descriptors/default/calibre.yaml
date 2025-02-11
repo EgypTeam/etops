@@ -138,7 +138,7 @@ spec:
             # cpu: 1
             memory: 1024Mi
       volumes:
-        - name: calibre-c
+        - name: calibre-external
           persistentVolumeClaim:
             claimName: calibre-external
         - name: calibre-config
