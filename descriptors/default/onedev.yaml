@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: onedev
-          image: onedev:latest
+          image: 1dev/server
           ports:
             - containerPort: 8080
           env:
