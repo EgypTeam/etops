@@ -1,9 +1,35 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: onedev
+  labels:
+    type: local
+spec:
+  storageClassName: onedev
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "$VOLUMESDIR/out/vol-onedev"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: onedev
 spec:
-  replicas: 1
+  storageClassName: onedev
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi 
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: onedev
+spec:
   selector:
     matchLabels:
       app: onedev
@@ -13,21 +39,22 @@ spec:
         app: onedev
     spec:
       containers:
+      - image: 1dev/server
+        name: onedev
+        ports:
+        - containerPort: 6610
+          name: onedev-0
+        - containerPort: 6611
+          name: onedev-1
+        volumeMounts:
         - name: onedev
-          image: 1dev/server
-          ports:
-            - containerPort: 8080
-          env:
-            - name: ENVIRONMENT
-              value: "production"
-          resources:
-            limits:
-              #cpu: "500m"
-              memory: "512Mi"
-            requests:
-              #cpu: "250m"
-              memory: "256Mi"
-
+          mountPath: /opt/onedev
+        stdin: true
+        tty: true
+      volumes:
+        - name: onedev
+          persistentVolumeClaim:
+            claimName: onedev
 ---
 apiVersion: v1
 kind: Service
@@ -38,7 +65,13 @@ spec:
   selector:
     app: onedev
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: ClusterIP  # Change to NodePort or LoadBalancer as needed
+    - name: "30610"
+      protocol: TCP
+      port: 30610
+      targetPort: 6610
+      nodePort: 30610
+    - name: "30611"
+      protocol: TCP
+      port: 30611
+      targetPort: 6611
+      nodePort: 30611
