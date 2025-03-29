@@ -1,0 +1,3 @@
+[submodule "descriptors"]
+	path = descriptors
+	url = git@github.com:EgypTeam/etops-descriptors.git
