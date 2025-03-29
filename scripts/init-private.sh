@@ -1,6 +1,9 @@
 #!/bin/bash
 
-rm -rf descriptors haproxy etops-confscripts-after-delete confscripts-before-create
+rm -rf descriptors
+rm -rf haproxy
+rm -rf confscripts-after-delete 
+rm -rf confscripts-before-create
 
 git submodule add git@github.com:EgypTeam/etops-descriptors.git descriptors
 git submodule add git@github.com:EgypTeam/etops-haproxy.git haproxy
