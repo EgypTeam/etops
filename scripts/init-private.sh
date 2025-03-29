@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ls -lah
+
 rm -rf descriptors
 rm -rf haproxy
 rm -rf confscripts-after-delete 
