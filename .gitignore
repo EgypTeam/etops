@@ -1,4 +1,7 @@
 /volumes/out/vol-*
 /confscripts-before-create/private-*
 /confscripts-after-delete/private-*
-
+/confscripts-after-delete
+/confscripts-before-create
+/descriptors
+/haproxy
