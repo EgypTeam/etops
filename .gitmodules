@@ -4,3 +4,6 @@
 [submodule "haproxy"]
 	path = haproxy
 	url = git@github.com:EgypTeam/etops-haproxy.git
+[submodule "confscripts-after-delete"]
+	path = confscripts-after-delete
+	url = git@github.com:EgypTeam/etops-confscripts-after-delete.git
