@@ -1,3 +1,6 @@
 [submodule "descriptors"]
 	path = descriptors
 	url = git@github.com:EgypTeam/etops-descriptors.git
+[submodule "haproxy"]
+	path = haproxy
+	url = git@github.com:EgypTeam/etops-haproxy.git
