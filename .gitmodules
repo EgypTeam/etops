@@ -7,3 +7,6 @@
 [submodule "confscripts-after-delete"]
 	path = confscripts-after-delete
 	url = git@github.com:EgypTeam/etops-confscripts-after-delete.git
+[submodule "confscripts-before-create"]
+	path = confscripts-before-create
+	url = git@github.com:EgypTeam/etops-confscripts-before-create.git
