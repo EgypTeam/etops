@@ -13,7 +13,9 @@ minikube start \
     --mount  \
     --apiserver-names=$HOSTNAME \
     --apiserver-ips=$IPADDRESS \
-    --static-ip=192.168.49.2
+    --static-ip=192.168.49.2 \
+    --extra-config=apiserver.service-node-port-range=1-65535
+
 
 # /etc/kubernetes/manifests/kube-apiserver.yaml
 # --apiserver-service-node-port-range=1-65535
