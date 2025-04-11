@@ -16,6 +16,7 @@ minikube start \
     --static-ip=192.168.49.2 \
     --extra-config=apiserver.service-node-port-range=1-65535
 
+minikube addons enable ingress
 
 # /etc/kubernetes/manifests/kube-apiserver.yaml
 # --apiserver-service-node-port-range=1-65535
