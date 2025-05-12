@@ -1,7 +1,3 @@
-Here’s the updated `README.md` with the correct Git URLs, author, and company information:
-
----
-
 # **etops - EgypTeam DevOps SDK**  
 **etops** is a CLI tool for orchestrating Kubernetes development and runtime environments for EgypTeam applications. It manages environments and services through simple bash commands and YAML descriptors.
 
@@ -111,15 +107,5 @@ MIT © [EgypTeam Intelligent Solutions](https://github.com/EgypTeam).
 ### **📞 Contact**  
 For issues or questions, contact:  
 - **Pedro Ferreira**  
-- GitHub: [@pedroferreira](https://github.com/pedroferreira) *(example)*  
-- Email: [pedro.ferreira@egypteam.com](mailto:pedro.ferreira@egypteam.com) *(example)*  
-
----
-
-This version includes:  
-1. Correct Git URLs (SSH + web)  
-2. Author and company details  
-3. Consistent formatting for EgypTeam branding  
-4. Placeholder contact info (update as needed)  
-
-Let me know if you'd like to add CI/CD badges or contributor guidelines!
+- GitHub: [@pedroferreira](https://github.com/pedrofmj) 
+- Email: [pedro.ferreira@egypteam.com](mailto:pedro.ferreira@egypteam.com)
