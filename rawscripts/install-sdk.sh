@@ -405,14 +405,22 @@ install_one() {
 
   if $REINSTALL; then
     echo "🔁 Reinstalando $ident ..."
+    # silencioso também no uninstall (não costuma perguntar, mas por segurança)
     sdk_cmd uninstall "$CANDIDATE" "$ident" >/dev/null 2>&1 || true
   fi
 
-  echo "📦 Instalando $ident ..."
+  echo "📦 Instalando $ident ... (silencioso)"
+  # Respostas automáticas:
+  #  1) 'y' -> confirma instalação
+  #  2) 'n' -> NÃO definir como default
+  local answers=$'y\nn\n'
+
   if $KEEP_GOING; then
-    sdk_cmd install "$CANDIDATE" "$ident" || echo "⚠️ Falha ao instalar $ident (continuando)."
+    # Alimenta as respostas via STDIN (sem prompt)
+    printf "%b" "$answers" | sdk_cmd install "$CANDIDATE" "$ident" \
+      || echo "⚠️ Falha ao instalar $ident (continuando)."
   else
-    sdk_cmd install "$CANDIDATE" "$ident"
+    printf "%b" "$answers" | sdk_cmd install "$CANDIDATE" "$ident"
   fi
 
   progress_tick "$ident"
