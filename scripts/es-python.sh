@@ -1,0 +1,13 @@
+#!/bin/bash
+
+THE_BASH_SOURCE=$BASH_SOURCE
+READ_LINK=$(readlink -f $THE_BASH_SOURCE)
+if [ "$READ_LINK" != "" ]; then
+    THE_BASH_SOURCE=$READ_LINK
+fi
+
+BINDIR=$(dirname $THE_BASH_SOURCE)
+BASEDIR=$(dirname $BINDIR)
+SCRIPTSDIR="$BASEDIR/scripts"
+EXTPYTHONSCRIPTSDIR="$BASEDIR/extscripts/python"
+python "$EXTPYTHONSCRIPTSDIR/$1.py" ${@:2}
