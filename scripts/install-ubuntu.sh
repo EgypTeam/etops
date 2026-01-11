@@ -276,25 +276,35 @@ install_kubectl() {
 }
 
 install_kubectx() {
-  if check_skip kubectx; then
-    echo "kubectx already installed — skipping."
+  # kubectx package on Ubuntu includes both kubectx and kubens binaries
+  # (kubens is provided by the kubectx package)
+  if check_skip kubectx && check_skip kubens; then
+    echo "kubectx/kubens already installed — skipping."
     return 0
   fi
 
   sudo apt-get update -y
   sudo apt-get install -y software-properties-common
 
-  # kubectx.org suggests installing via PPA on Ubuntu :contentReference[oaicite:8]{index=8}
-  # Idempotent-ish: add-apt-repository is safe to re-run, but we still avoid duplicates by grepping.
-  if ! grep -Rqs "ppa.launchpadcontent.net/ahmetb/kubectx" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null; then
-    sudo add-apt-repository -y ppa:ahmetb/kubectx
+  # Ensure "universe" repo is enabled (kubectx is in Ubuntu Universe on 24.04)
+  if ! grep -RqsE '^[[:space:]]*deb .* ubuntu.* universe' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null; then
+    echo "Enabling Ubuntu 'universe' repository..."
+    sudo add-apt-repository -y universe
   else
-    echo "kubectx PPA already present — skipping PPA add."
+    echo "Ubuntu 'universe' repository already enabled — skipping."
   fi
 
   sudo apt-get update -y
-  sudo apt-get install -y kubectx kubens
+  sudo apt-get install -y kubectx
+
+  # Sanity check: kubens should also exist after installing kubectx
+  if ! command -v kubens >/dev/null 2>&1; then
+    echo "WARNING: 'kubens' not found after installing kubectx." >&2
+    echo "         This is unexpected on Ubuntu noble where kubens is shipped with kubectx." >&2
+    exit 1
+  fi
 }
+
 
 install_k9s() {
   if check_skip k9s; then
