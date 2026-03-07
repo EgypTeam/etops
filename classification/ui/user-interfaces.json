@@ -1,0 +1,307 @@
+{
+  "taxonomy": {
+    "id": "ui_layout_classification",
+    "version": "1.0.0",
+    "title": "UI Density / Input Assumption / Chrome / Visual Language",
+    "description": "A practical UI classification modeled as independent axes (dimensions). Each UI can be described as a profile across axes, plus optional measured metrics.",
+    "created_at": "2026-01-18",
+    "axes": [
+      {
+        "id": "density",
+        "title": "Density",
+        "description": "How much space is used per control; how much content fits on screen.",
+        "type": "ordinal",
+        "levels": [
+          {
+            "id": "compact",
+            "label": "Compact",
+            "range_hint": { "score_min": 0, "score_max": 33 },
+            "notes": "Low padding; more items visible; tighter line height; smaller minimum control sizes."
+          },
+          {
+            "id": "comfortable",
+            "label": "Comfortable",
+            "range_hint": { "score_min": 34, "score_max": 66 },
+            "notes": "Balanced spacing; readable; moderate minimum control sizes."
+          },
+          {
+            "id": "spacious",
+            "label": "Spacious",
+            "range_hint": { "score_min": 67, "score_max": 100 },
+            "notes": "Generous padding; fewer items visible; larger minimum control sizes."
+          }
+        ],
+        "score_scale": { "min": 0, "max": 100, "direction": "higher_is_more_spacious" }
+      },
+      {
+        "id": "input_assumption",
+        "title": "Input Assumption",
+        "description": "What the UI seems optimized for: keyboard/pointer precision vs touch-first targets.",
+        "type": "ordinal",
+        "levels": [
+          {
+            "id": "keyboard_pointer_first",
+            "label": "Keyboard/Pointer-first",
+            "range_hint": { "score_min": 0, "score_max": 33 },
+            "notes": "Precision targets okay; hover is useful; shortcuts common; dense layouts acceptable."
+          },
+          {
+            "id": "mixed",
+            "label": "Mixed",
+            "range_hint": { "score_min": 34, "score_max": 66 },
+            "notes": "Works well with pointer and touch; targets moderate; less reliance on hover."
+          },
+          {
+            "id": "touch_first",
+            "label": "Touch-first",
+            "range_hint": { "score_min": 67, "score_max": 100 },
+            "notes": "Large hit targets; extra spacing; simplified navigation; minimal reliance on hover."
+          }
+        ],
+        "score_scale": { "min": 0, "max": 100, "direction": "higher_is_more_touch_first" }
+      },
+      {
+        "id": "chrome_level",
+        "title": "Chrome Level",
+        "description": "How much visible UI framing exists around content (toolbars, borders, persistent panels, window decorations).",
+        "type": "ordinal",
+        "levels": [
+          {
+            "id": "low_chrome",
+            "label": "Low-chrome",
+            "range_hint": { "score_min": 0, "score_max": 33 },
+            "notes": "Content dominates; fewer persistent bars/panels; minimal decoration."
+          },
+          {
+            "id": "medium_chrome",
+            "label": "Medium-chrome",
+            "range_hint": { "score_min": 34, "score_max": 66 },
+            "notes": "Some persistent chrome; common desktop app layout patterns."
+          },
+          {
+            "id": "high_chrome",
+            "label": "High-chrome",
+            "range_hint": { "score_min": 67, "score_max": 100 },
+            "notes": "More framing UI; multiple toolbars/panels; stronger window/controls presence."
+          }
+        ],
+        "score_scale": { "min": 0, "max": 100, "direction": "higher_is_more_chrome" }
+      },
+      {
+        "id": "visual_language",
+        "title": "Visual Language",
+        "description": "Primarily aesthetic rendering style. Optional but useful to describe 'Motif/classic vs modern'.",
+        "type": "categorical",
+        "levels": [
+          {
+            "id": "beveled_3d",
+            "label": "Beveled/3D",
+            "notes": "Raised/sunken controls, strong borders, classic widget framing."
+          },
+          {
+            "id": "flat_minimal",
+            "label": "Flat/Minimal",
+            "notes": "Few borders; color/spacing defines structure; minimal decoration."
+          },
+          {
+            "id": "card_elevation",
+            "label": "Card/Elevation",
+            "notes": "Surfaces/cards; shadows/elevation cues; spaced layouts common."
+          },
+          {
+            "id": "skeuomorphic",
+            "label": "Skeuomorphic",
+            "notes": "Real-world metaphors and textures."
+          }
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "id": "avg_control_padding_px",
+        "title": "Average control padding (px)",
+        "type": "number",
+        "units": "px",
+        "recommended_range": { "min": 0, "max": 40 },
+        "notes": "Average of horizontal/vertical padding across primary buttons/inputs/labels."
+      },
+      {
+        "id": "min_interactive_target_px",
+        "title": "Minimum interactive target size (px)",
+        "type": "number",
+        "units": "px",
+        "recommended_range": { "min": 16, "max": 64 },
+        "notes": "Smallest tappable/clickable target (height or min of width/height) used in common flows."
+      },
+      {
+        "id": "line_height_ratio",
+        "title": "Line height ratio",
+        "type": "number",
+        "units": "ratio",
+        "recommended_range": { "min": 1.0, "max": 2.0 },
+        "notes": "Computed as line-height / font-size for body text."
+      },
+      {
+        "id": "items_visible_in_standard_list",
+        "title": "Items visible in a standard list view",
+        "type": "integer",
+        "units": "count",
+        "recommended_range": { "min": 1, "max": 80 },
+        "notes": "How many list rows are visible at 100% scaling in a reference window size."
+      },
+      {
+        "id": "chrome_area_ratio",
+        "title": "Chrome area ratio",
+        "type": "number",
+        "units": "ratio",
+        "recommended_range": { "min": 0.0, "max": 0.8 },
+        "notes": "Estimated (chrome pixels) / (window pixels). Chrome = titlebar + toolbars + persistent sidebars/headers/footers."
+      },
+      {
+        "id": "hover_dependency",
+        "title": "Hover dependency",
+        "type": "ordinal",
+        "levels": [
+          { "id": "none", "score": 0, "label": "None" },
+          { "id": "low", "score": 33, "label": "Low" },
+          { "id": "medium", "score": 66, "label": "Medium" },
+          { "id": "high", "score": 100, "label": "High" }
+        ],
+        "notes": "How much essential functionality is hidden behind hover-only interactions."
+      }
+    ],
+    "profile_definition": {
+      "required_fields": [
+        "profile_id",
+        "name",
+        "axis_values"
+      ],
+      "axis_values_schema": {
+        "density": {
+          "required": ["level_id"],
+          "properties": {
+            "level_id": { "enum": ["compact", "comfortable", "spacious"] },
+            "score": { "type": "number", "min": 0, "max": 100 }
+          }
+        },
+        "input_assumption": {
+          "required": ["level_id"],
+          "properties": {
+            "level_id": { "enum": ["keyboard_pointer_first", "mixed", "touch_first"] },
+            "score": { "type": "number", "min": 0, "max": 100 }
+          }
+        },
+        "chrome_level": {
+          "required": ["level_id"],
+          "properties": {
+            "level_id": { "enum": ["low_chrome", "medium_chrome", "high_chrome"] },
+            "score": { "type": "number", "min": 0, "max": 100 }
+          }
+        },
+        "visual_language": {
+          "required": ["level_id"],
+          "properties": {
+            "level_id": { "enum": ["beveled_3d", "flat_minimal", "card_elevation", "skeuomorphic"] }
+          }
+        }
+      },
+      "optional_fields": [
+        "tags",
+        "notes",
+        "measured_metrics",
+        "examples",
+        "sources"
+      ]
+    },
+    "scoring_guidance": {
+      "purpose": "Provide a consistent way to derive axis scores from metrics when you want automation.",
+      "heuristics": [
+        {
+          "axis_id": "density",
+          "suggested_inputs": ["avg_control_padding_px", "line_height_ratio", "items_visible_in_standard_list"],
+          "example_rule_of_thumb": "More padding + larger line height + fewer visible list items => higher density score (more spacious)."
+        },
+        {
+          "axis_id": "input_assumption",
+          "suggested_inputs": ["min_interactive_target_px", "hover_dependency"],
+          "example_rule_of_thumb": "Larger minimum targets + low hover dependency => higher touch-first score."
+        },
+        {
+          "axis_id": "chrome_level",
+          "suggested_inputs": ["chrome_area_ratio"],
+          "example_rule_of_thumb": "Higher chrome_area_ratio => higher chrome score."
+        }
+      ]
+    }
+  },
+  "example_profiles": [
+    {
+      "profile_id": "dense_minimal_desktop",
+      "name": "Dense Minimal Desktop",
+      "axis_values": {
+        "density": { "level_id": "compact", "score": 20 },
+        "input_assumption": { "level_id": "keyboard_pointer_first", "score": 15 },
+        "chrome_level": { "level_id": "low_chrome", "score": 20 },
+        "visual_language": { "level_id": "flat_minimal" }
+      },
+      "tags": ["content_first", "desktop", "power_user"],
+      "notes": "Typical of tiling/WMs and very compact app themes."
+    },
+    {
+      "profile_id": "classic_framed_desktop",
+      "name": "Classic Framed Desktop",
+      "axis_values": {
+        "density": { "level_id": "comfortable", "score": 45 },
+        "input_assumption": { "level_id": "keyboard_pointer_first", "score": 35 },
+        "chrome_level": { "level_id": "high_chrome", "score": 75 },
+        "visual_language": { "level_id": "beveled_3d" }
+      },
+      "tags": ["classic", "motif_like", "desktop"],
+      "notes": "Strong widget framing and visible chrome; medium spacing."
+    },
+    {
+      "profile_id": "touch_spacious_modern",
+      "name": "Touch-Spacious Modern",
+      "axis_values": {
+        "density": { "level_id": "spacious", "score": 80 },
+        "input_assumption": { "level_id": "touch_first", "score": 85 },
+        "chrome_level": { "level_id": "medium_chrome", "score": 55 },
+        "visual_language": { "level_id": "card_elevation" }
+      },
+      "tags": ["modern", "touch_influenced", "readability_first"],
+      "notes": "Large hit targets and generous spacing; cards/elevation often used."
+    }
+  ],
+  "ui_instance_template": {
+    "instance_id": "replace_me",
+    "product": {
+      "name": "replace_me",
+      "version": "replace_me",
+      "platform": "replace_me"
+    },
+    "profile_ref": "dense_minimal_desktop",
+    "axis_values_override": {
+      "density": { "level_id": "compact", "score": 25 },
+      "input_assumption": { "level_id": "mixed", "score": 55 },
+      "chrome_level": { "level_id": "medium_chrome", "score": 50 },
+      "visual_language": { "level_id": "flat_minimal" }
+    },
+    "measured_metrics": {
+      "avg_control_padding_px": 6,
+      "min_interactive_target_px": 28,
+      "line_height_ratio": 1.2,
+      "items_visible_in_standard_list": 18,
+      "chrome_area_ratio": 0.18,
+      "hover_dependency": "medium"
+    },
+    "tags": ["evaluated"],
+    "notes": "Optional notes about why scores/levels were chosen.",
+    "sources": [
+      {
+        "type": "manual_review",
+        "details": "Reviewer observations and screenshots reference IDs (if any)."
+      }
+    ]
+  }
+}
+
